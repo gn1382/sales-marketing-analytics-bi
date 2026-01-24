@@ -25,4 +25,4 @@ Business Intelligence and Data Analytics skills.
 
 ## Status
 - Day 1: ERD design completed
-
+- Day 2: Relational database schema implemented in SQL Server using T-SQL
