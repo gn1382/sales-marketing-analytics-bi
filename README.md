@@ -27,3 +27,5 @@ Business Intelligence and Data Analytics skills.
 - Day 1: ERD design completed
 - Day 2: Relational database schema implemented in SQL Server using T-SQL
 - Day 3: Insert sample sales and markenting data
+- Day 4: Add sales analysis SQL queries
+
