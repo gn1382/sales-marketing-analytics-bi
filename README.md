@@ -28,4 +28,5 @@ Business Intelligence and Data Analytics skills.
 - Day 2: Relational database schema implemented in SQL Server using T-SQL
 - Day 3: Insert sample sales and markenting data
 - Day 4: Add sales analysis SQL queries
+- Day 5: Data cleaning, validation, and BI-ready views
 
