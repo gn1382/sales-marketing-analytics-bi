@@ -1,0 +1,54 @@
+--Data Quality Checks
+Select *
+From OrderItem
+Where Quantity <= 0 OR UnitPrice <= 0;
+
+--Orders without items
+Select o.OrderId
+From [Order] o
+Left Join OrderItem oi ON o.OrderId = oi.OrderId
+Where oi.OrderId IS NULL ;
+
+--Invalid payments
+Select *
+From Payment
+Where Amount <= 0 ;
+
+--Empty Emails
+Select *
+From Customer
+Where Email IS NULL OR Email = '' ;
+
+--Data Cleaning
+Delete From Payment
+Where Amount <= 0 ;
+
+--Data Standardization
+Update Payment
+Set PaymentMethod = UPPER(PaymentMethod);
+
+Select OrderId , CAST(OrderDate As Date)
+From [Order] ;
+
+
+-- BI-ready view for sales analysis (used in Power BI)
+Create OR Alter VIEW vw_SalesBI As
+Select
+    o.OrderId,
+    o.OrderDate,
+    c.CustomerId,
+    c.Name As CustomerName,
+    p.ProductId,
+    p.ProductTitle,
+    oi.Quantity,
+    oi.UnitPrice,
+    (oi.Quantity * oi.UnitPrice) As LineTotal,
+	YEAR(o.OrderDate) As OrderYear,
+	MONTH(o.OrderDate) As OrderMonth
+
+FROM [Order] o
+Join Customer c ON o.CustomerId = c.CustomerId
+Join OrderItem oi ON o.OrderId = oi.OrderId
+Join Product p ON oi.ProductId = p.ProductId ;
+
+
