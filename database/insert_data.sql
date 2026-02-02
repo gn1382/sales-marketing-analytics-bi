@@ -146,3 +146,25 @@ VALUES
 SELECT * FROM [Order];
 SELECT * FROM OrderItem;
 SELECT * FROM CampaignPerformance;
+
+
+DECLARE @i INT = 1;
+
+While @i <= 100
+Begin
+    Insert Into [Order] (OrderDate, TotalPrice)
+    Values (
+        DATEADD(DAY, -ABS(CHECKSUM(NEWID())) % 365, GETDATE()),
+        ABS(CHECKSUM(NEWID())) % 500000 + 100000
+    );
+
+    Set @i += 1;
+End
+
+Select
+    MONTH(OrderDate) As OrderMonth,
+    COUNT(*) As OrdersCount,
+    SUM(TotalPrice) As TotalSales
+From [Order]
+Group By MONTH(OrderDate)
+Order By OrderMonth;
